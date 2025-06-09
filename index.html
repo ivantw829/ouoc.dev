@@ -4,501 +4,422 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OuO Community</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
     <style>
-        /* 全局樣式 */
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #1a1a1a;
-            color: #ffffff;
-            line-height: 1.6;
+        :root {
+            --primary: #ffe600;
+            --secondary: #ff9500;
+            --bg: #18181c;
+            --card: #23232a;
+            --text: #f5f5f7;
+            --accent: #ffe600;
+            --radius: 18px;
+            --shadow: 0 4px 24px rgba(0,0,0,0.18);
         }
-
-        /* 導航欄 */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: #2c2c2c;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
+        html, body {
             margin: 0;
             padding: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Montserrat', Arial, sans-serif;
+            scroll-behavior: smooth;
         }
-
-        .nav-links a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #ffe600;
-        }
-
-        /* 漢堡選單按鈕 */
-        .menu-toggle {
-            display: none; /* 桌面模式隱藏 */
-            font-size: 2rem;
-            background: none;
-            border: none;
-            color: #ffffff;
-            cursor: pointer;
-        }
-
-        /* 區塊樣式 */
-        .section {
-            padding: 4rem 1rem;
-            text-align: center;
-            min-height: auto;
+        .navbar {
+            width: 100%;
+            background: linear-gradient(90deg, #23232a 60%, var(--secondary));
+            box-shadow: var(--shadow);
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 2.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-
-        h1, h2 {
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-        }
-
-        h3 {
-            font-size: 1.5rem;
-        }
-
-        /* 漸變標題 */
-        .gradient-title {
-            background: linear-gradient(90deg, #ffe600, #ff9500);
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--primary);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        .position-title {
-            font-weight: 900;
-            margin: 1.5rem 0 1rem;
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
         }
-
-        /* 主頁卡片 */
-        .home-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            max-width: 1200px;
-            margin: 1.5rem auto;
-        }
-
-        .home-card {
-            background-color: #2c2c2c;
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
-        }
-
-        .home-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .home-card h3 {
-            margin-bottom: 0.75rem;
-        }
-
-        .home-card p {
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        /* 服務項目卡片 */
-        .service-card {
-            background-color: #2c2c2c;
-            padding: 1.5rem;
-            border-radius: 10px;
-            max-width: 90%;
-            margin: 1.5rem auto;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .service-card p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .service-card strong {
-            color: #ffe600;
-        }
-
-        /* 團隊成員 */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto 2rem;
-        }
-
-        .team-member {
-            background-color: #2c2c2c;
-            padding: 1rem;
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-
-        .team-member img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin-bottom: 0.75rem;
-            transition: opacity 0.3s;
-        }
-
-        .team-member a {
-            color: #ffffff;
+        .nav-links a {
             text-decoration: none;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: color 0.2s;
         }
-
-        .team-member a:hover {
-            color: #ffe600;
+        .nav-links a:hover {
+            color: var(--secondary);
         }
-
-        .team-member:hover {
-            transform: scale(1.05);
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--primary);
+            cursor: pointer;
         }
-
-        .team-member img:hover {
-            opacity: 0.8;
-        }
-
-        /* 聯絡卡片 */
-        .contact-card {
-            background-color: #2c2c2c;
-            padding: 1.5rem;
-            border-radius: 10px;
-            max-width: 90%;
-            margin: 1.5rem auto;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        .hero {
+            min-height: 60vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 1rem 3rem 1rem;
+            background: linear-gradient(120deg, #23232a 0%, #18181c 100%);
         }
-
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.2rem;
+        }
+        .hero-desc {
+            font-size: 1.3rem;
+            color: #e0e0e0;
+            margin-bottom: 2.5rem;
+        }
+        .cta-btn {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: #23232a;
+            font-weight: 700;
+            border: none;
+            border-radius: 32px;
+            padding: 0.9rem 2.2rem;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: transform 0.18s, box-shadow 0.18s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .cta-btn:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 8px 32px rgba(255, 230, 0, 0.15);
+        }
+        .section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3.5rem 1.2rem;
+        }
+        .section-title {
+            font-size: 2.3rem;
+            font-weight: 800;
+            margin-bottom: 2.2rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.18s, box-shadow 0.18s;
+        }
+        .card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 8px 32px rgba(255, 230, 0, 0.10);
+        }
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.7rem;
+            color: var(--primary);
+        }
+        .card p {
+            font-size: 1.05rem;
+            color: #e0e0e0;
+        }
+        /* Team Section */
+        .team-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        .team-member {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 170px;
+            transition: transform 0.18s, box-shadow 0.18s;
+        }
+        .team-member:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 32px rgba(255, 230, 0, 0.10);
+        }
+        .team-member img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 0.7rem;
+            border: 3px solid var(--primary);
+        }
+        .team-member h4 {
+            margin: 0.3rem 0 0.1rem 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .team-member span {
+            font-size: 0.98rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        .team-member a {
+            text-decoration: none;
+            color: inherit;
+        }
+        /* Contact Section */
+        .contact-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .contact-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 260px;
+        }
         .contact-icon {
+            font-size: 2.5rem;
             margin-bottom: 1rem;
+            color: var(--secondary);
         }
-
         .contact-card h3 {
-            margin: 0.5rem 0;
+            margin: 0.5rem 0 0.7rem 0;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary);
         }
-
         .contact-card p {
             font-size: 1rem;
-            margin: 0.5rem 0 1rem;
+            color: #e0e0e0;
+            margin-bottom: 1.2rem;
         }
-
-        /* 聯絡按鈕 */
         .contact-btn {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: linear-gradient(90deg, #ffe600, #ff9500);
-            color: #ffffff;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: #23232a;
+            font-weight: 700;
+            border: none;
+            border-radius: 32px;
+            padding: 0.6rem 1.5rem;
+            font-size: 1.05rem;
+            box-shadow: var(--shadow);
+            cursor: pointer;
             text-decoration: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            transition: transform 0.3s;
+            transition: transform 0.18s;
         }
-
         .contact-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.07);
         }
-
-        /* 手機適應 - 媒體查詢 */
-        @media (max-width: 768px) {
-            /* 導航欄 */
+        /* Responsive */
+        @media (max-width: 900px) {
             .navbar {
-                padding: 0.5rem 1rem;
-                justify-content: space-between;
+                padding: 1rem 1.2rem;
             }
-
-            .menu-toggle {
-                display: block; /* 手機上顯示漢堡按鈕 */
-            }
-
-            .nav-links {
-                display: none; /* 預設隱藏 */
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: #2c2c2c;
-                padding: 1rem 0;
-            }
-
-            .nav-links.active {
-                display: flex; /* 點擊漢堡按鈕時顯示 */
-            }
-
-            .nav-links li {
-                padding: 0.5rem 0;
-            }
-
-            /* 標題 */
-            h1, h2 {
-                font-size: 2.5rem;
-            }
-
-            h3 {
-                font-size: 1.25rem;
-            }
-
-            /* 主頁卡片 */
-            .home-grid {
-                grid-template-columns: 1fr;
-                padding: 0 1rem;
-            }
-
-            .home-card {
-                padding: 1rem;
-            }
-
-            /* 服務項目 */
-            .service-card {
-                padding: 1rem;
-            }
-
-            .service-card p {
-                font-size: 1rem;
-            }
-
-            /* 團隊成員 */
-            .team-grid {
-                grid-template-columns: 1fr;
-                padding: 0 1rem;
-            }
-
-            .team-member img {
-                width: 70px;
-                height: 70px;
-            }
-
-            /* 聯絡卡片 */
-            .contact-card {
-                padding: 1rem;
-            }
-
-            .contact-btn {
-                padding: 0.4rem 0.8rem;
-                font-size: 1rem;
+            .section {
+                padding: 2.5rem 0.5rem;
             }
         }
-
-        @media (max-width: 480px) {
-            h1, h2 {
-                font-size: 2rem;
+        @media (max-width: 700px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100vw;
+                background: #23232a;
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1.5rem 0;
+                box-shadow: var(--shadow);
             }
-
-            h3 {
-                font-size: 1.1rem;
+            .nav-links.active {
+                display: flex;
             }
-
-            .section {
-                padding: 3rem 0.5rem;
+            .menu-toggle {
+                display: block;
             }
-
-            .home-card p, .service-card p, .contact-card p {
-                font-size: 0.9rem;
+            .hero-title {
+                font-size: 2.2rem;
             }
-
-            .team-member img {
-                width: 60px;
-                height: 60px;
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .team-list, .contact-cards {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 導航欄 -->
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">OuO Community</div>
-        <button class="menu-toggle">☰</button>
+        <button class="menu-toggle" aria-label="開啟選單">☰</button>
         <ul class="nav-links">
             <li><a href="#home">主頁</a></li>
-            <li><a href="#services">服務項目</a></li>
-            <li><a href="#team">團隊成員</a></li>
-            <li><a href="#contact">聯絡資料</a></li>
+            <li><a href="#services">服務</a></li>
+            <li><a href="#team">團隊</a></li>
+            <li><a href="#contact">聯絡</a></li>
         </ul>
     </nav>
-
-    <!-- 主頁 -->
-    <section id="home" class="section">
-        <h1 class="gradient-title">OuO Community</h1>
-        <div class="home-grid">
-            <div class="home-card">
-                <h3>程式設計的家</h3>
-                <p>OuO Community 是建立在 Discord 上的程式討論社群，匯聚了無數熱愛技術的靈魂。</p>
-            </div>
-            <div class="home-card">
-                <h3>創意與成長</h3>
-                <p>我們提供一個充滿創意與支持的環境，讓你與其他開發者交流想法並共同進步。</p>
-            </div>
-            <div class="home-card">
-                <h3>適合所有人</h3>
-                <p>無論你是新手還是專家，這裡都有資源與機會等著你，一起探索無限可能。</p>
-            </div>
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="hero-title">OuO Community</div>
+        <div class="hero-desc">
+            程式設計的家，聚集創意與成長。<br>
+            無論新手或專家，這裡都是你的技術夥伴。
         </div>
-        <a href="https://dc.ouoc.dev/" target="_blank" class="contact-btn">加入 Discord</a>
+        <a href="https://dc.ouoc.dev/" target="_blank" class="cta-btn">加入 Discord</a>
     </section>
-
-    <!-- 服務項目 -->
+    <!-- Services -->
     <section id="services" class="section">
-        <h2 class="gradient-title">服務項目</h2>
-        <div class="service-card">
-            <h3>Discord 機器人編寫服務</h3>
-            <p>我們提供專業的 Discord 機器人客製化服務，滿足多樣化的需求。無論是用於<strong>遊戲群組</strong>的娛樂功能、<strong>網路電商</strong>的訂單管理、<strong>官方社群</strong>的活動推廣，還是<strong>投資監測</strong>的即時數據追蹤，我們都能根據你的需求量身打造功能強大的機器人。憑藉豐富的經驗，我們的服務不僅高效，還能提升社群互動與管理效率，讓你的 Discord 伺服器脫穎而出。</p>
+        <div class="section-title">服務項目</div>
+        <div class="card-grid">
+            <div class="card">
+                <h3>Discord 機器人編寫</h3>
+                <p>專業客製化 Discord 機器人，支援遊戲娛樂、電商管理、活動推廣、投資監測等多元需求，提升社群互動與管理效率。</p>
+            </div>
+            <div class="card">
+                <h3>技術交流社群</h3>
+                <p>活躍的 Discord 技術討論區，涵蓋各類程式語言、框架、專案協作，歡迎新手與高手共同成長。</p>
+            </div>
+            <div class="card">
+                <h3>專案合作與顧問</h3>
+                <p>提供專案顧問、技術諮詢與合作機會，協助你解決開發難題，推動創新專案落地。</p>
+            </div>
         </div>
     </section>
-
-    <!-- 團隊成員 -->
+    <!-- Team -->
     <section id="team" class="section">
-        <h2>團隊成員</h2>
-        <!-- 負責人 -->
-        <h3 class="gradient-title position-title">負責人</h3>
-        <div class="team-grid">
+        <div class="section-title">團隊成員</div>
+        <div class="team-list">
             <div class="team-member">
                 <a href="https://antou.dev/" target="_blank">
                     <img src="https://imgur.com/AEbGm4Y.png" alt="Zaira">
-                </a>
-                <a href="https://antou.dev/" target="_blank">
-                    <h3>Zaira</h3>
+                    <h4>Zaira</h4>
+                    <span>負責人</span>
                 </a>
             </div>
-        </div>
-        <!-- 總管理 -->
-        <h3 class="gradient-title position-title">總管理</h3>
-        <div class="team-grid">
             <div class="team-member">
                 <a href="https://github.com/ItsRqtl" target="_blank">
                     <img src="https://imgur.com/joEaccA.png" alt="Rqtl">
-                </a>
-                <a href="https://github.com/ItsRqtl" target="_blank">
-                    <h3>Rqtl</h3>
+                    <h4>Rqtl</h4>
+                    <span>總管理</span>
                 </a>
             </div>
             <div class="team-member">
                 <a href="https://github.com/watermelon1024" target="_blank">
                     <img src="https://avatars.githubusercontent.com/u/76525576?v=4" alt="Watermelon">
-                </a>
-                <a href="https://github.com/watermelon1024" target="_blank">
-                    <h3>Watermelon</h3>
+                    <h4>Watermelon</h4>
+                    <span>總管理</span>
                 </a>
             </div>
-        </div>
-        <!-- 副管理 -->
-        <h3 class="gradient-title position-title">副管理</h3>
-        <div class="team-grid">
             <div class="team-member">
                 <a href="https://hans0805.me/" target="_blank">
                     <img src="https://avatars.githubusercontent.com/u/94590267?v=4" alt="Hans">
-                </a>
-                <a href="https://hans0805.me/" target="_blank">
-                    <h3>Hans</h3>
+                    <h4>Hans</h4>
+                    <span>副管理</span>
                 </a>
             </div>
             <div class="team-member">
                 <a href="https://github.com/tw-yuan" target="_blank">
                     <img src="https://avatars.githubusercontent.com/u/85051500?v=4" alt="Yuan">
-                </a>
-                <a href="https://github.com/tw-yuan" target="_blank">
-                    <h3>Yuan</h3>
+                    <h4>Yuan</h4>
+                    <span>副管理</span>
                 </a>
             </div>
-        </div>
-        <!-- 合作廠商 -->
-        <h3 class="gradient-title position-title">合作廠商</h3>
-        <div class="team-grid">
             <div class="team-member">
                 <a href="https://ncse.tw" target="_blank">
                     <img src="https://imgur.com/v3kn44W.png" alt="國雲網路">
-                </a>
-                <a href="https://ncse.tw" target="_blank">
-                    <h3>國雲網路</h3>
+                    <h4>國雲網路</h4>
+                    <span>合作廠商</span>
                 </a>
             </div>
             <div class="team-member">
                 <a href="https://nafstore.net" target="_blank">
                     <img src="https://imgur.com/kLAxLmU.png" alt="NAF Store">
-                </a>
-                <a href="https://nafstore.net" target="_blank">
-                    <h3>NAF Store</h3>
+                    <h4>NAF Store</h4>
+                    <span>合作廠商</span>
                 </a>
             </div>
         </div>
     </section>
-
-    <!-- 聯絡資料 -->
+    <!-- Contact -->
     <section id="contact" class="section">
-        <h2>聯絡資料</h2>
-        <div class="contact-card">
-            <div class="contact-icon">
-                <svg width="50" height="50" viewBox="0 0 24 24" fill="#ffffff">
-                    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.626.846 5.06 2.275 7.03L0 24l5.075-2.24A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.208 0-4.247-.754-5.874-2.016l-.354-.21-3.03 1.337 1.365-2.94-.213-.36A9.957 9.957 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/>
-                    <path d="M17.92 13.688c-.31-.155-1.84-.897-2.126-.998-.285-.102-.492-.05-.698.154-.205.204-.798.998-.975 1.202-.177.204-.36.23-.665.588-.305.358-.153.814-.563 1.074-.41.26-.767.413-1.38.463-.614.05-1.125.025-1.638-.077-.513-.102-2.05-.665-2.357-.897-.308-.23-.513-.332-.718-.332-.205 0-.513.077-.718.28-.205.204-.798.793-.975.998-.177.204-.332.23-.638.128-.305-.102-1.28-.588-2.433-1.433-1.153-.845-1.922-1.89-2.126-2.203-.205-.313-.022-.483.154-.637.177-.153.36-.358.563-.588.205-.23.256-.41.36-.614.102-.204.05-.358-.025-.563-.077-.204-.698-1.638-.975-2.203-.256-.537-.513-.465-.698-.465-.205 0-.513.077-.718.28-.205.204-.798.793-.975.998-.177.204-.332.23-.638.128-.305-.102-1.28-.588-2.433-1.433z"/>
-                </svg>
+        <div class="section-title">聯絡我們</div>
+        <div class="contact-cards">
+            <div class="contact-card">
+                <div class="contact-icon">💬</div>
+                <h3>Discord 客服</h3>
+                <p>加入我們的 Discord 客服專區，立即獲得專業協助與技術支持！</p>
+                <a href="https://dc.ouoc.dev/" target="_blank" class="contact-btn">加入 Discord</a>
             </div>
-            <h3>聯絡我們</h3>
-            <p>加入我們的 Discord 客服專區，立即獲得專業協助與技術支持！</p>
-            <a href="https://dc.ouoc.dev/" target="_blank" class="contact-btn">加入 Discord</a>
-        </div>
-        <div class="contact-card">
-            <div class="contact-icon">
-                <svg width="50" height="50" viewBox="0 0 24 24" fill="#ffffff">
-                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 2l-8 5-8-5h16zm-2 12H6V8l6 3.75L18 8v10z"/>
-                </svg>
+            <div class="contact-card">
+                <div class="contact-icon">📧</div>
+                <h3>電子郵件</h3>
+                <p>有任何問題或合作提案？請隨時透過 Email 聯繫我們！</p>
+                <a href="mailto:connect@ouoc.dev" class="contact-btn">connect@ouoc.dev</a>
             </div>
-            <h3>電子郵件</h3>
-            <p>有任何問題或合作提案？請隨時透過 Email 聯繫我們！</p>
-            <a href="mailto:connect@ouoc.dev" class="contact-btn">connect@ouoc.dev</a>
         </div>
     </section>
-
     <script>
-        // 漢堡選單切換
+        // 手機選單切換
         document.querySelector('.menu-toggle').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
         });
-
         // 平滑滾動
         document.querySelectorAll('.nav-links a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
-                document.querySelector(targetId).scrollIntoView({
-                    behavior: 'smooth'
-                });
-                // 手機上點擊後關閉選單
-                if (window.innerWidth <= 768) {
+                document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                if (window.innerWidth <= 700) {
                     document.querySelector('.nav-links').classList.remove('active');
                 }
             });
         });
-
-        // 滾動淡入動畫
-        const sections = document.querySelectorAll('.section');
-
+        // 卡片淡入動畫
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -506,22 +427,20 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.3 });
-
-        sections.forEach(section => {
-            section.style.opacity = 0;
-            observer.observe(section);
+        }, { threshold: 0.2 });
+        document.querySelectorAll('.card, .team-member, .contact-card').forEach(el => {
+            el.style.opacity = 0;
+            observer.observe(el);
         });
-
-        // 定義淡入樣式
+        // 動畫樣式
         const styleSheet = document.createElement('style');
         styleSheet.textContent = `
             .fade-in {
-                animation: fadeIn 1s forwards;
+                animation: fadeIn 0.9s cubic-bezier(.4,0,.2,1) forwards;
             }
             @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(20px); }
-                to { opacity: 1; transform: translateY(0); }
+                from { opacity: 0; transform: translateY(30px);}
+                to { opacity: 1; transform: translateY(0);}
             }
         `;
         document.head.appendChild(styleSheet);
